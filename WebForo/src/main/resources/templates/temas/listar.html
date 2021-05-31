@@ -20,7 +20,7 @@
 			<h1 class="display-4">Temas del RicardoForo</h1>
 			<p th:text="*{mensaje}" class="lead"></p>
 			<hr class="my-4">
-			<div th:replace="/fragmentos :: navbar"></div>
+			<div th:replace="fragmentos :: navbar"></div>
 			<p class="text-danger"></p>
 			<div th:if="*{error != null}" class="alert alert-warning alert-dismissible fade show" role="alert">
 				<button type="button" class="close" data-bs-dismiss="alert">&times;</button>
