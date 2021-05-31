@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +27,7 @@ public class TemasController {
 	@Autowired
 	ServicioReplica servicioReplica;
 	
-	@GetMapping(path = "/temas/listar")
+	@RequestMapping("/temas/listar")
 	public String listar(Model modelo) {
 		Iterable<Tema> temas = servicioTema.verTodos();
 		if(temas != null && temas.iterator().hasNext()) {
@@ -43,7 +43,7 @@ public class TemasController {
 		return "temas/listar";
 	}
 	
-	@PostMapping(path = "/temas/agregar")
+	@PostMapping("/temas/agregar")
 	public String agregar(Model modelo, @ModelAttribute Tema tema, HttpSession sesion) {
 		int iduser = Integer.parseInt(sesion.getAttribute("iduser").toString());
 		Usuario autor = servicioUsuario.buscar(iduser);
@@ -57,7 +57,7 @@ public class TemasController {
 		return "redirect:/temas/listar";
 	}
 	
-	@GetMapping(path = "/temas/detalles/{id}")
+	@RequestMapping("/temas/detalles/{id}")
 	public String detalles(Model modelo, @PathVariable int id) {
 		Tema tema = servicioTema.buscar(id);
 		modelo.addAttribute("tema", tema.getTitulo());
@@ -77,7 +77,7 @@ public class TemasController {
 		return "temas/detalles";
 	}
 	
-	@PostMapping(path = "/temas/agregarreplica")
+	@PostMapping("/temas/agregarreplica")
 	public String agregar(Model modelo, @ModelAttribute Replica replica, HttpSession sesion) {
 		int iduser = Integer.parseInt(sesion.getAttribute("iduser").toString());
 		Usuario autor = servicioUsuario.buscar(iduser);
