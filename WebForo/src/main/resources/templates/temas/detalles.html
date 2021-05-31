@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie-edge">
+	<title>Lista de réplicas - RicardoForo</title> 
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
+	integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" 
+	crossorigin="anonymous">
+	<script src="/js/jquery-3.5.0.min.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>	
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron bg-info">
+			<h1 class="display-4 text-white" th:text="'Réplicas de: '+*{tema}"></h1>
+			<p class="lead"></p>
+			<hr class="my-4">
+			<div th:replace="/fragmentos :: navbar"></div>
+			<p class="text-danger"></p>
+			<div th:if="*{error != null}"
+				class="alert alert-warning alert-dismissible fade show" role="alert">
+				<button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+				<h4 th:text=*{error}></h4>				
+			</div>
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-10">
+					<div th:if="*{replicas != null}">
+						<div th:each="replica : ${replicas}" class="card bg-success">
+							<h5 th:text="${replica.contenido}" class="text-white"></h5>
+							<label th:text="'Enviado por: '+${replica.usuario.alias}" class="text-white"></label>
+						</div>
+					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
+			<hr class="my-4">
+			<div class="row">
+				<div class="col-2"></div>
+				<div class="col-9">
+					<form action="#" th:action="@{/temas/agregarreplica}" th:object="${replica}"
+						method="post">
+						<fieldset>
+						<legend class="text-white">Responder...</legend>
+						<textarea rows="4" cols="50" required="required" th:field="*{contenido}"
+							class="form-control" placeholder="Máximo 400 caracteres."
+							maxlength="400"></textarea>
+						<input type="hidden" th:field="*{tema}">
+						<p>
+							<input type="submit" value="Comentar" class="btn btn-primary" /> <input type="reset"
+								value="Limpiar" class="btn btn-secondary" />
+						</p>
+						</fieldset>
+					</form>
+				</div>
+				<div class="col-1"></div>
+			</div>
+		</div>
+		<hr class="my-4">
+		<div class="row">
+			<div class="col-2"></div>
+			<div class="col-8">
+				<p>Desarrollo de Aplicaciones Web. Alumno José Ricardo Ortega Cazares.</p>
+				<p>ITSSNP 2021.</p> 
+			</div>
+			<div class="col-2"></div>
+		</div>
+	</div>
+</body>
+</html>
