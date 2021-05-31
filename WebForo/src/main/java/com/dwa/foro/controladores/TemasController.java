@@ -27,7 +27,7 @@ public class TemasController {
 	@Autowired
 	ServicioReplica servicioReplica;
 	
-	@GetMapping("/temas/listar")
+	@GetMapping(value = "/temas/listar")
 	public String listar(Model modelo) {
 		Iterable<Tema> temas = servicioTema.verTodos();
 		if(temas != null && temas.iterator().hasNext()) {
@@ -43,7 +43,7 @@ public class TemasController {
 		return "temas/listar";
 	}
 	
-	@PostMapping("/temas/agregar")
+	@PostMapping(value = "/temas/agregar")
 	public String agregar(Model modelo, @ModelAttribute Tema tema, HttpSession sesion) {
 		int iduser = Integer.parseInt(sesion.getAttribute("iduser").toString());
 		Usuario autor = servicioUsuario.buscar(iduser);
@@ -57,7 +57,7 @@ public class TemasController {
 		return "redirect:/temas/listar";
 	}
 	
-	@GetMapping("/temas/detalles/{id}")
+	@GetMapping(value = "/temas/detalles/{id}")
 	public String detalles(Model modelo, @PathVariable int id) {
 		Tema tema = servicioTema.buscar(id);
 		modelo.addAttribute("tema", tema.getTitulo());
@@ -77,7 +77,7 @@ public class TemasController {
 		return "temas/detalles";
 	}
 	
-	@PostMapping("/temas/agregarreplica")
+	@PostMapping(value = "/temas/agregarreplica")
 	public String agregar(Model modelo, @ModelAttribute Replica replica, HttpSession sesion) {
 		int iduser = Integer.parseInt(sesion.getAttribute("iduser").toString());
 		Usuario autor = servicioUsuario.buscar(iduser);

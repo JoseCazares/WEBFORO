@@ -23,20 +23,20 @@ public class UsuarioController {
 		return "usuario/validar";
 	}
 	
-	@PostMapping("/usuario/validar")
+	@PostMapping(value = "/usuario/validar")
 	public String agregar(@RequestParam("username") String correoe,
 			@RequestParam("password") String clave,
 			Model modelo) {
 			return "redirect:/temas/listar";
 	}
 	
-	@GetMapping("/usuario/agregar")
+	@GetMapping(value = "/usuario/agregar")
 	public String agregar(Model model) {
 		model.addAttribute("usuario", new Usuario());
 		return "usuario/agregar";
 	}
 	
-	@PostMapping("/usuario/agregar")
+	@PostMapping(value = "/usuario/agregar")
 	public String agregar(Model modelo, @ModelAttribute Usuario user, 
 			@RequestParam("clave") String clave, HttpSession sesion) {
 		boolean res = servicioUsuario.agregar(user, clave, sesion);
@@ -48,7 +48,7 @@ public class UsuarioController {
 		return "usuario/agregar";
 	}
 	
-	@GetMapping("/usuario/salir")
+	@GetMapping(value = "/usuario/salir")
 	public String salir(HttpSession sesion) {
 		SecurityContextHolder.clearContext();
 		sesion.invalidate();
